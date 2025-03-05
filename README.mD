@@ -1,4 +1,3 @@
-
 ### To create a django project
 django-admin startproject <nameofapplication>
 
@@ -38,7 +37,7 @@ c. to consolidate the templating for our project, modify the following
    - set a global template directory for referencing our templates i.e.
     move the todolist template folder to the global perspective i.e. 
     root directory level
-   - register his change in settings.py for the project under the templates
+   - register this change in settings.py for the project under the templates
      directory settings
 
       'DIRS': [BASE_DIR / 'templates'], # add this line

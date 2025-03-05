@@ -12,7 +12,7 @@ def task_list(request):
 
 
 def add_task(request):
-    "adds a new task"
+    """adds a new task"""
     if request.method == "POST":
         task = request.POST.get("task")
         #checking if task has been captured
@@ -28,4 +28,27 @@ def add_task(request):
             messages.error(request, "Task not found")
     #redirect is different from render, render loads the template,
     # redirect simply changes the web address to a given location
+    return redirect('task_list')
+
+def delete_task(request, index):
+    """delete the task at the given index"""
+    tasks = request.session.get('tasks', [])
+    if 0 <= index < len(tasks):
+        del tasks[index]
+        #save the new tasks
+        request.session['tasks'] = tasks
+        messages.success(request, "Task deleted")
+    else:
+        messages.error(request, "Task not found")
+    return redirect('task_list')
+
+def mark_complete(request, index):
+    """mark the task at the given index as complete"""
+    tasks = request.session.get('tasks', [])
+    if 0 <= index < len(tasks):
+        tasks[index]['done'] = True
+        request.session['tasks'] = tasks
+        messages.success(request, "tasks marked as complete")
+    else:
+        messages.error(request, "task not found")
     return redirect('task_list')

@@ -14,8 +14,14 @@
     {% for task in tasks %}
         <li>
         {{ task.task }} - completed {{ task.done }}
+        {% if task.done %}
+        Completed
+        {% else %}
+            <a href="{% url 'mark_complete' forloop.counter0 %}">Mark as done</a>
+        {% endif %}
+            <a href="{% url 'delete_task' forloop.counter0 %}">Delete this task</a>
         </li>
-        {# shoe this on no task #}
+        {# show this on no task #}
         {% empty %}
         <li>NO TASKS AVAILABLE</li>
     {% endfor %}
